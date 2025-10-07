@@ -1,4 +1,3 @@
-/* app.js — To-Do Dashboard + Pomodoro (separate file) */
 document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "todo_dashboard_v1";
   const WORK_TIME = 25 * 60;
@@ -57,11 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return `${m}:${s}`;
   }
 
-  /* state + interval */
   let state = loadState();
   let timerInterval = null;
 
-  /* elements */
   const boardEl = document.getElementById("board");
   const addColumnBtn = document.getElementById("add-column");
   const newColumnName = document.getElementById("new-column-name");
@@ -85,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
       WORK_TIME / 60 + " хв робота / " + BRAKE_TIME / 60 + " хв перерва";
   }
 
-  /* render */
   function render() {
     setTimeTitle();
     boardEl.innerHTML = "";
@@ -252,7 +248,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateTimerUI();
   }
 
-  /* column functions */
   function addColumn() {
     const name = newColumnName.value.trim();
     if (!name) return alert("Введіть імʼя колонки");
@@ -285,7 +280,6 @@ document.addEventListener("DOMContentLoaded", () => {
     render();
   }
 
-  /* tasks */
   function addTaskToTodo() {
     const title = taskTitle.value.trim();
     if (!title) return alert("Введіть назву завдання");
@@ -335,7 +329,6 @@ document.addEventListener("DOMContentLoaded", () => {
     render();
   }
 
-  /* drag & drop */
   let draggedTaskId = null;
   function onDragStart(e, taskId) {
     draggedTaskId = taskId;
@@ -359,8 +352,6 @@ document.addEventListener("DOMContentLoaded", () => {
     saveState();
     render();
   }
-
-  /* timer */
 
   function updateTimerUI() {
     const timer = state.timer;
@@ -480,7 +471,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* events */
   addColumnBtn.addEventListener("click", addColumn);
   addTaskBtn.addEventListener("click", addTaskToTodo);
   filterSelect.addEventListener("change", () => {
@@ -498,7 +488,6 @@ document.addEventListener("DOMContentLoaded", () => {
   pauseTimerBtn.addEventListener("click", pauseTimer);
   resetTimerBtn.addEventListener("click", resetTimer);
 
-  /* init */
   (function ensureColumns() {
     const hasTodo = state.columns.some((c) => c.id === "col-todo");
     const hasDone = state.columns.some((c) => c.id === "col-done");
